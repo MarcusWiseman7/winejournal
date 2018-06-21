@@ -102,47 +102,47 @@
           <div class="form-row col">
             <div class="form-group col-sm">
               <label for="wineName">Wine Name</label>
-              <input type="text" class="form-control" id="wineName" name="wineName" placeholder="Wine 5.." required autofocus>
+              <input type="text" class="form-control" id="wineName" name="wineName" required autofocus>
             </div>
             <div class="form-group col-sm">
               <label for="winery">Winery</label>
-              <input type="text" class="form-control" id="winery" name="winery" placeholder="Winery 5.." required>
+              <input type="text" class="form-control" id="winery" name="winery" required>
             </div>
           </div>
 
           <div class="form-row col">
             <div class="form-group col-sm-4">
               <label for="grapes">Grapes</label>
-              <input type="text" class="form-control" id="grapes" name="grapes" placeholder="Merlot..">
+              <input type="text" class="form-control" id="grapes" name="grapes">
             </div>
             <div class="form-group col-sm-4">
               <label for="country">Country</label>
-              <input type="text" class="form-control" id="country" name="country" placeholder="Italy..">
+              <input type="text" class="form-control" id="country" name="country">
             </div>
             <div class="form-group col-sm-4">
               <label for="vintage">Vintage</label>
-              <input type="text" class="form-control" id="vintage" name="vintage" placeholder="1979..">
+              <input type="text" class="form-control" id="vintage" name="vintage">
             </div>
           </div>
 
           <div class="form-row col">
             <div class="form-group col-sm">
               <label for="rating">Rating</label>
-              <input type="text" class="form-control" id="rating" name="rating" placeholder="1-10.." required>
+              <input type="text" class="form-control" id="rating" name="rating" required>
             </div>
             <div class="form-group col-sm">
               <label for="location">Location</label>
-              <input type="text" class="form-control" id="location" name="location" placeholder="Pub..">
+              <input type="text" class="form-control" id="location" name="location">
             </div>
             <div class="form-group col-sm">
               <label for="price">Price</label>
-              <input type="text" class="form-control" id="price" name="price" placeholder="85 czk..">
+              <input type="text" class="form-control" id="price" name="price">
             </div>
           </div>
           
           <div class="form-group col-sm">
             <label for="notes">Notes</label>
-            <textarea class="form-control" name="notes" id="notes" rows="3" placeholder="Color, aroma, flavor, etc.."></textarea>
+            <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
           </div>
 
           <div class="modal-footer">
@@ -192,7 +192,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-warning modalButton" data-toggle="modal" data-target="#wineModal" id="\{{wine._id}}">Edit Wine</button>
+    <button type="button" class="btn btn-info modalButton" data-toggle="modal" data-target="#wineModal" id="\{{wine._id}}">Edit Wine</button>
   </div>
 </script>
 {{!-- / template for showing one wine --}}
