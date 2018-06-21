@@ -1,0 +1,252 @@
+<div class="jumbotron">
+  <a type="button" class="btn btn-secondary float-right" id="logout" href="/users/logout">Log Out</a>
+  <a type="button" class="btn btn-secondary modalButton float-right text-white" data-toggle="modal" data-target="#loginModal" id="login">Login/Signup</a>
+  <div class="container d-flex justify-content-center">
+    <h1 class="display-4">{{title}}
+      <a id="addWine" style="margin-bottom:.5rem" class="btn btn-info modalButton" data-toggle="modal" data-target="#addWineModal">
+        <i class="fas fa-wine-glass fa-2x"></i>
+      </a>
+    </h1>
+  </div>
+</div>
+
+{{!-- wines in journal --}}
+<table id="wines-table" class="table table-hover my-5">
+  <thead>
+    <tr>
+      <th scope="col">Show</th>
+      <th scope="col">Name</th>
+      <th scope="col">Winery</th>
+    </tr>
+  </thead>
+  <tbody id="wines-in-journal"></tbody>
+</table>
+{{!-- / wines in journal --}}
+
+{{!-- modal for showing a wine  --}}
+<div class="modal fade" id="showWineModal" tabindex="-1" role="dialog" aria-labelledby="showWineModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="show-wine"></div>
+  </div>
+</div>
+{{!-- / modal for showing a wine  --}}
+
+{{!-- modal for login/signup --}}
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login/Signup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/users/login" method="POST" id="login-form">
+          <div class="form-group col-6">
+            <label for="userName">User Name</label>
+            <input type="text" class="form-control" id="username" name="username" autofocus required>
+          </div>
+          <div class="form-group col-6">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-warning" id="newUser">New User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for login/signup --}}
+
+{{!-- modal for editing a wine --}}
+<div class="modal fade" id="wineModal" tabindex="-1" role="dialog" aria-labelledby="wineModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="wineModalLabel">Edit Wine</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="wine-modal-form"></form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="deleteWine" class="btn btn-dark">Delete Wine</button>
+        <button type="button" id="saveWine" class="btn btn-info">Save Wine</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for editing a wine --}}
+
+{{!-- modal for adding a wine --}}
+<div class="modal fade" id="addWineModal" tabindex="-1" role="dialog" aria-labelledby="addWineModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addWineModalLabel">Add Wine</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="wine-form" method="POST" action="/add">
+          <div class="form-row col">
+            <div class="form-group col-sm">
+              <label for="wineName">Wine Name</label>
+              <input type="text" class="form-control" id="wineName" name="wineName" placeholder="Wine 5.." required autofocus>
+            </div>
+            <div class="form-group col-sm">
+              <label for="winery">Winery</label>
+              <input type="text" class="form-control" id="winery" name="winery" placeholder="Winery 5.." required>
+            </div>
+          </div>
+
+          <div class="form-row col">
+            <div class="form-group col-sm-4">
+              <label for="grapes">Grapes</label>
+              <input type="text" class="form-control" id="grapes" name="grapes" placeholder="Merlot..">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="country">Country</label>
+              <input type="text" class="form-control" id="country" name="country" placeholder="Italy..">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="vintage">Vintage</label>
+              <input type="text" class="form-control" id="vintage" name="vintage" placeholder="1979..">
+            </div>
+          </div>
+
+          <div class="form-row col">
+            <div class="form-group col-sm">
+              <label for="rating">Rating</label>
+              <input type="text" class="form-control" id="rating" name="rating" placeholder="1-10.." required>
+            </div>
+            <div class="form-group col-sm">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" id="location" name="location" placeholder="Pub..">
+            </div>
+            <div class="form-group col-sm">
+              <label for="price">Price</label>
+              <input type="text" class="form-control" id="price" name="price" placeholder="85 czk..">
+            </div>
+          </div>
+          
+          <div class="form-group col-sm">
+            <label for="notes">Notes</label>
+            <textarea class="form-control" name="notes" id="notes" rows="3" placeholder="Color, aroma, flavor, etc.."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" id="addWine" class="btn btn-info">Add Wine</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- / modal for adding a wine --}}
+
+{{!-- template for displaying wines --}}
+<script id="wines-template" type="text/x-handlebars-template">
+  \{{#each wines}}
+    <tr>
+      <td>
+        <a id="\{{_id}}" class="btn btn-info modalButton" data-toggle="modal" data-target="#showWineModal">
+          <i class="fa fa-wine-glass"></i>
+        </a>
+      </td>
+      <td>\{{wineName}}</td>
+      <td>\{{winery}}</td>
+    </tr>
+  \{{/each}}
+</script>
+{{!-- / template for displaying wines --}}
+
+{{!-- template for showing one wine  --}}
+<script id="show-wine-template" type="text/x-handlebars-template">
+  <div class="modal-header">
+    <h4 class="modal-title" id="showWineModalTitle">\{{wine.wineName}}</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>Winery: \{{wine.winery}}</h6>
+    <p>Grapes: \{{wine.grapes}}</p>
+    <p>Country: \{{wine.country}}</p>
+    <p>Vintage: \{{wine.vintage}}</p>
+    <p>Price: \{{wine.price}}</p>
+    <p>Location: \{{wine.location}}</p>
+    <p>Rating: \{{wine.rating}}</p>
+    <p>Notes: \{{wine.notes}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-warning modalButton" data-toggle="modal" data-target="#wineModal" id="\{{wine._id}}">Edit Wine</button>
+  </div>
+</script>
+{{!-- / template for showing one wine --}}
+
+{{!-- template for editing wine --}}
+<script id="wine-edit-template" type="text/x-handlebars-template">
+  <div class="form-row col">
+    <div class="form-group col-sm">
+      <label for="edit-wineName">Wine Name</label>
+      <input type="text" class="form-control" id="edit-wineName" name="edit-wineName" value="\{{wine.wineName}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-winery">Winery</label>
+      <input type="text" class="form-control" id="edit-winery" name="edit-winery" value="\{{wine.winery}}">
+    </div>
+  </div>
+
+  <div class="form-row col">
+    <div class="form-group col-sm-4">
+      <label for="edit-grapes">Grapes</label>
+      <input type="text" class="form-control" id="edit-grapes" name="edit-grapes" value="\{{wine.grapes}}">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="edit-country">Country</label>
+      <input type="text" class="form-control" id="edit-country" name="edit-country" value="\{{wine.country}}">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="edit-vintage">Vintage</label>
+      <input type="text" class="form-control" id="edit-vintage" name="edit-vintage" value="\{{wine.vintage}}">
+    </div>
+  </div>
+
+  <div class="form-row col">
+    <div class="form-group col-sm">
+      <label for="edit-rating">Rating</label>
+      <input type="text" class="form-control" id="edit-rating" name="edit-rating" value="\{{wine.rating}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-location">Location</label>
+      <input type="text" class="form-control" id="edit-location" name="edit-location" value="\{{wine.location}}">
+    </div>
+    <div class="form-group col-sm">
+      <label for="edit-price">Price</label>
+      <input type="text" class="form-control" id="edit-price" name="edit-price" value="\{{wine.price}}">
+    </div>
+  </div>
+  
+  <div class="form-group col-sm">
+    <label for="edit-notes">Notes</label>
+    <textarea class="form-control" name="edit-notes" id="edit-notes" rows="3">\{{wine.notes}}</textarea>
+  </div>
+  <div class="form-group col-sm">
+    <label for="edit-wineId">Wine Id</label>
+    <input type="text" name="" id="edit-wineId" value="\{{wine._id}}" readonly>
+  </div>
+</script>
+{{!-- / template for editing wine --}}
