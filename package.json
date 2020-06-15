@@ -22,7 +22,7 @@
     "hbs": "^4.0.4",
     "helmet": "^3.12.1",
     "lodash": "^4.17.11",
-    "mongodb": "^3.0.7",
+    "mongodb": "^3.5.9",
     "mongoose": "^5.5.7",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
